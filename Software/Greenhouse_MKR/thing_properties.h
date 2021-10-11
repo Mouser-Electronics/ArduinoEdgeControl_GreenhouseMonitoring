@@ -39,7 +39,7 @@ void initProperties() {
   ArduinoCloud.setSecretDeviceKey(SECRET_DEVICE_KEY);
 #endif
   ArduinoCloud.setThingId(THING_ID);
-#if defined(BOARD_HAS_WIFI) || defined(BOARD_HAS_GSM) || defined(BOARD_HAS_NB)
+#if defined(BOARD_HAS_WIFI) || defined(BOARD_HAS_GSM) || defined(BOARD_HAS_NB) || defined(BOARD_HAS_LORA)
   ArduinoCloud.addProperty(MANUAL_CONTROL_SWITCH_ON, Permission::Write).onUpdate(onManualControlSwitchChange);
   ArduinoCloud.addProperty(FAN_SWITCH_ON, Permission::Write).onUpdate(onFanSwitchChange);
   ArduinoCloud.addProperty(HEATER_SWITCH_ON, Permission::Write).onUpdate(onHeaterSwitchChange);
@@ -54,10 +54,6 @@ void initProperties() {
   ArduinoCloud.addProperty(HEATER_ON, Permission::Read).publishOnChange(10);
   ArduinoCloud.addProperty(FAN_ON, Permission::Read).publishOnChange(10);
   ArduinoCloud.addProperty(LOUVER_OPEN, Permission::Read).publishOnChange(10);
-#elif defined(BOARD_HAS_LORA)
-  ArduinoCloud.addProperty(led, 1, READWRITE, ON_CHANGE, onLedChange);
-  ArduinoCloud.addProperty(potentiometer, 2, READ, ON_CHANGE);
-  ArduinoCloud.addProperty(seconds, 3, READ, 5 * MINUTES);
 #endif
 }
 
